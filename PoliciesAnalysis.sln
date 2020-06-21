@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoliciesAnalysis", "PoliciesAnalysis\PoliciesAnalysis.csproj", "{60ADE332-3570-4BE0-A1E0-2EE168BB519C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtractIDDetailsFromJson", "ExtractIDDetailsFromJson\ExtractIDDetailsFromJson.csproj", "{BB536026-14D4-43B1-8566-DB2A67912147}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60ADE332-3570-4BE0-A1E0-2EE168BB519C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60ADE332-3570-4BE0-A1E0-2EE168BB519C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60ADE332-3570-4BE0-A1E0-2EE168BB519C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60ADE332-3570-4BE0-A1E0-2EE168BB519C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB536026-14D4-43B1-8566-DB2A67912147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB536026-14D4-43B1-8566-DB2A67912147}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB536026-14D4-43B1-8566-DB2A67912147}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB536026-14D4-43B1-8566-DB2A67912147}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D594ABA-55EE-4633-8990-D0E80F33F9B0}
+	EndGlobalSection
+EndGlobal

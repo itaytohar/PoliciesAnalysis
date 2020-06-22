@@ -41,7 +41,17 @@ namespace ExtractIDDetailsFromJson
                         }
                         if (valText.Length >= 10)
                         {
-                            string item = (valText).Substring(valText.Length - 10);
+                            valText = valText.Replace("\"", String.Empty);
+                            string item;
+
+                            if (int.TryParse(valText.Substring(0,1), out res))
+                            {
+                                item = (valText).Substring(0, 10);
+                            }
+                            else
+                            {
+                                item = (valText).Substring(valText.Length - 10);
+                            }
                             if (Regex.Match(item, rex).Success && !(int.TryParse(item, out res)))
                             {
                                 list.Add(item);

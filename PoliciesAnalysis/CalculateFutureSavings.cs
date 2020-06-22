@@ -30,6 +30,7 @@ namespace PoliciesAnalysis
             string CustomerID = req.Query["ID"];
             string BirthDate = req.Query["BirthDate"].ToString().Replace('.', '/');
             DateTime dBirthDate;
+            string EMAIL="";
             int Age = 0;
             int YearsForPension = 0;
             int ID = 0;
@@ -49,14 +50,14 @@ namespace PoliciesAnalysis
             {
                 log.LogError($"Parse BirthDate for Customer Failed");
                 responseMessage = "Error";
-                return new OkObjectResult(responseMessage);
+                return new BadRequestObjectResult(responseMessage);
             }
 
+            var str = Environment.GetEnvironmentVariable("sqldb_connection");
             if (int.TryParse(CustomerID, out ID))
             {
                 // Update somw rows of policies for the new customer
                 text = $"UPDATE dbo.Policies SET CustomerID = {ID}, IsVisible = 1 WHERE PolicyNum IN (SELECT TOP {NumOfPolicies} PolicyNum FROM  dbo.Policies WHERE CustomerID = 99)";
-                var str = Environment.GetEnvironmentVariable("sqldb_connection");
                 using (SqlConnection connLocal = new SqlConnection(str))
                 {
                     connLocal.Open();
@@ -102,15 +103,32 @@ namespace PoliciesAnalysis
             {
                 log.LogError($"Parse Customer ID Error");
                 responseMessage = "Error";
-                return new OkObjectResult(responseMessage);
+                return new BadRequestObjectResult(responseMessage);
             }
 
 
+            string text3 = $"Select EMAIL FROM dbo.CustomerDetails  Where Id = '{CustomerID}'";
+            using (SqlConnection conn3 = new SqlConnection(str))
+            {
+                conn3.Open();
 
-//            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-//            dynamic data = JsonConvert.DeserializeObject(requestBody);
+                using (SqlCommand cmd = new SqlCommand(text3, conn3))
+                {
+                    // Execute the command and log the # rows affected.
 
-            responseMessage = "Success";
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            EMAIL = (string)reader["EMAIL"];
+                        }
+                    }
+                }
+            }
+                            //            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                            //            dynamic data = JsonConvert.DeserializeObject(requestBody);
+
+            responseMessage = EMAIL;
             return new OkObjectResult(responseMessage);
         }
 

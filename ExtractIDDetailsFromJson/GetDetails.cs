@@ -35,12 +35,18 @@ namespace ExtractIDDetailsFromJson
                         string valText = ((string)val.text).Trim();
                         valText = Regex.Replace(valText, @" ", string.Empty);
                         int res = 0;
-                        if (valText.Length == 9 && int.TryParse(valText, out res))
+                        if (valText.Length == 9 && int.TryParse(valText, out res) )
                         {
                             ID = valText;
                         }
+
                         if (valText.Length >= 10)
                         {
+                            string sID = valText.Substring(0, 9);
+                            if (int.TryParse(sID, out res))
+                            {
+                                ID = sID;
+                            }
                             valText = valText.Replace("\"", String.Empty);
                             string item;
 

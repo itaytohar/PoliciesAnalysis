@@ -37,7 +37,7 @@ namespace PoliciesAnalysis
             double YearlyInterest = 1.04;
             string text = "";
             Random rnd = new Random();
-            int NumOfPolicies = rnd.Next(1, 3);
+            int NumOfPolicies = rnd.Next(2, 3);
            // dBirthDate = DateTime.ParseExact(BirthDate, "dd/mm/yyyy", CultureInfo.InvariantCulture);
             if (DateTime.TryParseExact(BirthDate, "d/M/yyyy",
                             CultureInfo.InvariantCulture,

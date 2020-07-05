@@ -31,13 +31,14 @@ namespace ExtractIDDetailsFromJson
                 {
                     foreach (var val in kv.value)
                     {
-
+                        bool CurrentIterationSet = false;
                         string valText = ((string)val.text).Trim();
                         valText = Regex.Replace(valText, @" ", string.Empty);
                         int res = 0;
                         if (valText.Length == 9 && int.TryParse(valText, out res) )
                         {
                             ID = valText;
+                            CurrentIterationSet = true;
                         }
 
                         if (valText.Length >= 10)
@@ -46,25 +47,32 @@ namespace ExtractIDDetailsFromJson
                             if (int.TryParse(sID, out res))
                             {
                                 ID = sID;
+                                CurrentIterationSet = true;
                             }
                             valText = valText.Replace("\"", String.Empty);
                             string item;
-
-                            if (int.TryParse(valText.Substring(0,1), out res))
+                            if (!CurrentIterationSet)
                             {
-                                item = (valText).Substring(0, 10);
-                            }
-                            else
-                            {
-                                item = (valText).Substring(valText.Length - 10);
-                            }
-                            if (Regex.Match(item, rex).Success && !(int.TryParse(item, out res)))
-                            {
-                                list.Add(item);
+                                if (int.TryParse(valText.Substring(0, 1), out res) && ID.Length == 0)
+                                {
+                                    item = (valText).Substring(0, 10);
+                                }
+                                else
+                                {
+                                    item = (valText).Substring(valText.Length - 10);
+                                }
+                                if (Regex.Match(item, rex).Success && !(int.TryParse(item, out res)))
+                                {
+                                    list.Add(item);
+                                }
                             }
                         }
                     }
                 }
+            }
+            if(list.Count<2)
+            {
+                return new ConflictResult();
             }
             string IssueDate = list[1];
             string burthDate = list[0];

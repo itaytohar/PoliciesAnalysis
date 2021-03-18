@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 
+
 namespace PoliciesAnalysis
 {
     public class YearlySavings

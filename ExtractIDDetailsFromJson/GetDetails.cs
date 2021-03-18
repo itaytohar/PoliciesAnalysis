@@ -65,6 +65,14 @@ namespace ExtractIDDetailsFromJson
                                 {
                                     list.Add(item);
                                 }
+                                else
+                                {
+                                    item = (valText).Substring(0, 10);
+                                    if (Regex.Match(item, rex).Success && !(int.TryParse(item, out res)))
+                                    {
+                                        list.Add(item);
+                                    }
+                                }
                             }
                         }
                     }
